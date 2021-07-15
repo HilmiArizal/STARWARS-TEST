@@ -1,0 +1,1 @@
+export * as pageCharacterAction from './CharacterAction';

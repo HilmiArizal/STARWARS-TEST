@@ -1,0 +1,10 @@
+.bg-light{
+    padding: 15px 20px;
+    background-color: #9FE2BF !important;
+}
+
+.navbar-brand{
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
