@@ -1,1 +1,1 @@
-export * as pageCharacterAction from './CharacterAction';
+export * as characterAction from './CharacterAction';

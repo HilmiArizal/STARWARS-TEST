@@ -2,25 +2,42 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Icon, Menu, Table } from 'semantic-ui-react';
-import { pageCharacterAction } from '../../Redux/Action/index';
+import { characterAction } from '../../Redux/Action/index';
 import './Character.css';
 
 export default function Character({ data }) {
 
     const [page, setPage] = useState(1);
+    const [search, setSearch] = useState('');
 
     const dispatch = useDispatch();
-    const { pageCharacter } = bindActionCreators(pageCharacterAction, dispatch);
+    const { pageCharacter, searchCharacter } = bindActionCreators(characterAction, dispatch);
 
     function handlePageClick(e, { name }) {
-        if(!(name < 1) && !(name > data.count)){
+        if (!(name < 1) && !(name > data.count)) {
             setPage(name);
             pageCharacter(name);
+            searchCharacter(search)
+        }
+    }
+
+    function handleSearchClick(e) {
+        if (e.key === "Enter") {
+            pageCharacter(page);
+            searchCharacter(search);
         }
     }
 
     return (
         <div className="body-character">
+
+            <div className="ui action input">
+                <input type="text" placeholder="Search by character..." onKeyPress={handleSearchClick} onChange={(e) => setSearch(e.target.value)} />
+                <button className="ui icon button" onClick={handleSearchClick}>
+                    <i className="search icon"></i>
+                </button>
+            </div>
+
             <Table celled>
                 <Table.Header>
                     <Table.Row>

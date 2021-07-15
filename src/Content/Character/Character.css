@@ -1,3 +1,7 @@
 .body-character{
     padding: 5em;
 }
+
+.input{
+    float: right;
+}
