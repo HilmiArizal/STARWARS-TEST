@@ -31,8 +31,8 @@ export default function Character({ data }) {
     return (
         <div className="body-character">
 
-            <div className="ui action input">
-                <input type="text" placeholder="Search by character..." onKeyPress={handleSearchClick} onChange={(e) => setSearch(e.target.value)} />
+            <div className="ui action input mb-3">
+                <input type="text" placeholder="Search character..." onKeyPress={handleSearchClick} onChange={(e) => setSearch(e.target.value)} />
                 <button className="ui icon button" onClick={handleSearchClick}>
                     <i className="search icon"></i>
                 </button>

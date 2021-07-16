@@ -10,9 +10,29 @@ export const fetchCharacter = async (valuePage, valueSearch) => {
     })
 }
 
-export const fetchMovies = async (value) => {
-    let urlMovies = `films`;
+export const fetchMovies = async () => {
+    let urlMovies = `films/`;
     return await API.get(urlMovies).then((res) => {
         return res.data;
+    }).catch((err) => {
+        console.log(err);
+    })
+}
+
+export const fetchMoviesId = async (valueId) => {
+    let urlMovies = `films/${valueId}`;
+    return await API.get(urlMovies).then((res) => {
+        return res.data;
+    }).catch((err) => {
+        console.log(err);
+    })
+}
+
+export const fetchCharacterId = async (valueId) => {
+    let urlMovies = `people/${valueId}`;
+    return await API.get(urlMovies).then((res) => {
+        return res.data;
+    }).catch((err) => {
+        console.log(err);
     })
 }
