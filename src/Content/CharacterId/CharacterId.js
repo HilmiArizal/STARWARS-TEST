@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { fetchCharacterId, fetchMoviesId } from '../../Service/ContentService/ContentService';
+import './CharacterId.css';
 
 export default function CharacterId(props) {
 
@@ -22,25 +23,44 @@ export default function CharacterId(props) {
     }, [characterId]);
 
     return (
-        <div className="body-characterId">
+        <div className="body-characterId-character">
             {!loading ? (
                 <Dimmer active inverted>
                     <Loader inverted>Loading</Loader>
                 </Dimmer>
             ) : (
-                <div>
-                    {character.name}
-
                     <div>
-                        <div className="mb-3">Films :</div>
-                        {character.films.map((item) => {
-                            const filmsUrl = item.split('/').filter(Boolean);
-                            const filmsId = filmsUrl[filmsUrl.length - 1];
-                            return (<MoviesId id={filmsId} key={filmsId} />);
-                        })}
+                        <table className="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>Name </td>
+                                    <td>{character.name}</td>
+                                </tr>
+                                <tr>
+                                    <td>Height </td>
+                                    <td>{character.height}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mass </td>
+                                    <td>{character.mass}</td>
+                                </tr>
+                                <tr>
+                                    <td>Gender </td>
+                                    <td>{character.gender}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div className="mt-2">
+                            <div className="mb-3">Films :</div>
+                            {character.films.map((item) => {
+                                const filmsUrl = item.split('/').filter(Boolean);
+                                const filmsId = filmsUrl[filmsUrl.length - 1];
+                                return (<MoviesId id={filmsId} key={filmsId} />);
+                            })}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
         </div>
     )
 
@@ -64,8 +84,6 @@ function MoviesId(props) {
         fetchAllMoviesId();
     }, [id]);
 
-    console.log(movie);
-
     return (
         <div className="body-movieId">
 
@@ -73,14 +91,15 @@ function MoviesId(props) {
                 <Dimmer active inverted>
                     <Loader inverted>Loading</Loader>
                 </Dimmer>
-            ) :
-                <div>
-                    <ul>
-                        <li>
-                            <Link to={`/movies/${id}`}>{movie.title}</Link>
-                        </li>
-                    </ul>
-                </div>
+            ) : (
+                    <div>
+                        <ul>
+                            <li>
+                                <Link to={`/movies/${id}`}>{movie.title}</Link>
+                            </li>
+                        </ul>
+                    </div>
+                )
             }
 
         </div>

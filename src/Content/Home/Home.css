@@ -1,0 +1,37 @@
+.body-home{
+    background-image: url(../../Asset/Image/starwars-home.jpeg) ;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.body-home .search-home{
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+}
+
+.body-home .search-movies{
+    margin: 0px 50px;
+}
+
+.body-home .search-movies .input {
+    width: 200px !important;
+}
+
+@media (max-width: 500px){
+    .body-home .search-home{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 50%;
+        top: 90%;
+        transform: translate(-50%, -50%);
+    }
+
+    .body-home .search-movies{
+        margin: 5px 0px;
+    }
+} 

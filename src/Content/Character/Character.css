@@ -1,7 +1,35 @@
 .body-character{
     padding: 5em;
+    margin-top: 5em;
 }
 
 .input{
     float: right;
+}
+
+.body-character thead tr{
+    text-align: center;
+}
+
+.body-character tr{
+    transition: all 0.3s ease;
+}
+
+.body-character tr:hover{
+    background-color: rgb(160, 160, 160);
+}
+
+.body-character td > a{
+    background-color: rgb(64, 163, 255);
+    padding: 2px 10px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid rgb(64, 163, 255);
+}
+
+.body-character td > a:hover{
+    color: #111;
+    background-color: rgb(160, 160, 160);
 }

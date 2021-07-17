@@ -20,12 +20,10 @@ export default function Movies() {
     useEffect(() => {
         async function fetchAllMovies() {
             await fetchMovies().then((res) => {
-                console.log(res)
                 setMovies(res);
                 setLoading(true);
             })
         }
-
         fetchAllMovies();
     }, [])
 
@@ -37,47 +35,41 @@ export default function Movies() {
                         <Loader interved>Loading</Loader>
                     </Dimmer>
                 ) : (
-                    <div className="row">
-                        {
-                            movies.results.map((item, index) => {
-                                const moviesUrl = item.url.split("/").filter(Boolean);
-                                const moviesId = moviesUrl[moviesUrl.length - 1];
-                                return (
-                                    <div className="col-md-3" key={index}>
-                                        <div className="ui link cards">
-                                            <Link to={`/movies/${moviesId}`}>
-                                                <div className="card">
-                                                    <div className="image">
-                                                        <img src={StarwarsCard} alt="img-movies" width="100%" />
-                                                    </div>
-                                                    <div className="content">
-                                                        <div className="header">{item.title}</div>
-                                                        <div className="meta">
-                                                            <div>{item.director}</div>
+                        <div>
+                            <div className="text-center mb-3">-- MOVIES --</div>
+                            <div className="row">
+                                {
+                                    movies.results.map((item, index) => {
+                                        const moviesUrl = item.url.split("/").filter(Boolean);
+                                        const moviesId = moviesUrl[moviesUrl.length - 1];
+                                        return (
+                                            <div className="col-md-3" key={index}>
+                                                <div className="ui link cards">
+                                                    <Link to={`/movies/${moviesId}`}>
+                                                        <div className="card">
+                                                            <div className="image">
+                                                                <img src={StarwarsCard} alt="img-movies" width="100%" />
+                                                            </div>
+                                                            <div className="content">
+                                                                <div className="header">{item.title}</div>
+                                                                <div className="meta">
+                                                                    <div>{item.director}</div>
+                                                                </div>
+                                                                <div className="description" style={{ fontSize: "12px" }}>
+                                                                    {openingCrawl(item.opening_crawl)}...
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div className="description" style={{ fontSize: "12px" }}>
-                                                            {openingCrawl(item.opening_crawl)}...
-                                                        </div>
-                                                    </div>
-                                                    <div className="extra content">
-                                                        <span className="right floated">
-                                                            {item.release_date}
-                                                        </span>
-                                                        <span>
-                                                            <i className="user icon"></i>
-                                                            {item.episode_id}
-                                                        </span>
-                                                    </div>
+                                                    </Link>
                                                 </div>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                )
-                            })
+                                            </div>
+                                        )
+                                    })
 
-                        }
-                    </div>
-                )
+                                }
+                            </div>
+                        </div>
+                    )
             }
         </div>
     )

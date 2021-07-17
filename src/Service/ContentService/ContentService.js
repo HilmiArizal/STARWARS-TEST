@@ -36,3 +36,21 @@ export const fetchCharacterId = async (valueId) => {
         console.log(err);
     })
 }
+
+export const fetchSearchCharacter = async (valueSearch) => {
+    let urlCharacter = `people/?search=${valueSearch}`;
+    return await API.get(urlCharacter).then((res) => {
+        return res.data;
+    }).catch((err) => {
+        console.log(err);
+    })
+}
+
+export const fetchSearchMovie = async (valueSearch) => {
+    let urlMovies = `films/?search=${valueSearch}`;
+    return await API.get(urlMovies).then((res) => {
+        return res.data;
+    }).catch((err) => {
+        console.log(err);
+    })
+}

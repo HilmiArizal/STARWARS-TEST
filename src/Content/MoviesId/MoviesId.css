@@ -1,5 +1,6 @@
 .body-moviesId{
     padding: 2em;
+    margin-top: 5em;
 }
 
 .body-moviesId .image img{
@@ -18,5 +19,9 @@
 .body-moviesId .release{
     font-size: 12px;
     color: rgb(160, 160, 160);
+}
+
+.body-moviesId .opening{
+  text-align: justify;
 }
 

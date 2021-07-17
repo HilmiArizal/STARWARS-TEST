@@ -84,7 +84,7 @@ function CharacterId(props) {
     }, [id]);
 
     return (
-        <div className="body-characterId">
+        <div className="body-characterId-movie">
             <ul>
                 <li>
                     <Link to={`/character/${id}`}>{character.name}</Link>

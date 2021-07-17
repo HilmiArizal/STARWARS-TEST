@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Icon, Menu, Table } from 'semantic-ui-react';
 import { characterAction } from '../../Redux/Action/index';
@@ -41,24 +42,30 @@ export default function Character({ data }) {
             <Table celled>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>No. </Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
                         <Table.HeaderCell>Height</Table.HeaderCell>
                         <Table.HeaderCell>Mass</Table.HeaderCell>
                         <Table.HeaderCell>Gender</Table.HeaderCell>
+                        <Table.HeaderCell>Action</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 
                 {
                     data.results.map((item, index) => {
+                        const characterUrl = item.url.split('/').filter(Boolean);
+                        const characterId = characterUrl[characterUrl.length - 1];
                         return (
                             <Table.Body key={index}>
                                 <Table.Row>
-                                    <Table.Cell>{index + 1}</Table.Cell>
                                     <Table.Cell>{item.name}</Table.Cell>
                                     <Table.Cell>{item.height}</Table.Cell>
                                     <Table.Cell>{item.mass}</Table.Cell>
                                     <Table.Cell>{item.gender}</Table.Cell>
+                                    <Table.Cell>
+                                        <Link to={`/character/${characterId}`}>
+                                            Detail
+                                        </Link>
+                                    </Table.Cell>
                                 </Table.Row>
                             </Table.Body>
                         )

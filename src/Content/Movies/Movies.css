@@ -1,3 +1,29 @@
 .body-movies{
     padding: 5em;
+    margin-top: 5em;
+}
+
+.body-movies .text-center{
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.body-movies .card{
+    margin: 20px;
+}
+
+.body-movies .content{
+    padding: 10px;
+    color: #111;
+}
+
+.body-movies .content .header{
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.body-movies .content .meta{
+    color: rgb(160,160,169);
+    font-size: 12px;
 }

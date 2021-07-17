@@ -1,0 +1,17 @@
+.body-characterId-character{
+    padding: 2em;
+    margin-top: 5em;
+}
+
+.body-characterId-character .table{
+    display: inline-flex;
+}
+
+.body-characterId-character tr td:nth-child(1) {
+    font-weight: 600;
+}
+
+.body-characterId-character tr td {
+    padding: 0.5em 1em ;
+}
+
