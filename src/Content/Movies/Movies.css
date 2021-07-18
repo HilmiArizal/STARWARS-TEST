@@ -1,6 +1,6 @@
 .body-movies{
     padding: 5em;
-    margin-top: 5em;
+    margin-top: 2em;
 }
 
 .body-movies .text-center{
@@ -10,7 +10,7 @@
 }
 
 .body-movies .card{
-    margin: 20px;
+    margin: 20px 5px;
 }
 
 .body-movies .content{
@@ -26,4 +26,11 @@
 .body-movies .content .meta{
     color: rgb(160,160,169);
     font-size: 12px;
+}
+
+.body-movies .input{
+    margin-top: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

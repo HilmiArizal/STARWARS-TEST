@@ -10,8 +10,8 @@ export const fetchCharacter = async (valuePage, valueSearch) => {
     })
 }
 
-export const fetchMovies = async () => {
-    let urlMovies = `films/`;
+export const fetchMovies = async (valueSearch) => {
+    let urlMovies = `films/?search=${valueSearch}`;
     return await API.get(urlMovies).then((res) => {
         return res.data;
     }).catch((err) => {
@@ -40,15 +40,6 @@ export const fetchCharacterId = async (valueId) => {
 export const fetchSearchCharacter = async (valueSearch) => {
     let urlCharacter = `people/?search=${valueSearch}`;
     return await API.get(urlCharacter).then((res) => {
-        return res.data;
-    }).catch((err) => {
-        console.log(err);
-    })
-}
-
-export const fetchSearchMovie = async (valueSearch) => {
-    let urlMovies = `films/?search=${valueSearch}`;
-    return await API.get(urlMovies).then((res) => {
         return res.data;
     }).catch((err) => {
         console.log(err);

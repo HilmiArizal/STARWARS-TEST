@@ -13,12 +13,8 @@
     transform: translate(-50%, -50%);
 }
 
-.body-home .search-movies{
+.body-home .sub-search-home{
     margin: 0px 50px;
-}
-
-.body-home .search-movies .input {
-    width: 200px !important;
 }
 
 @media (max-width: 500px){

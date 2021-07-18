@@ -1,99 +1,49 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { Icon, Menu, Table } from 'semantic-ui-react';
-import { characterAction } from '../../Redux/Action/index';
+import React, { useEffect, useState } from 'react';
+import { Dimmer, Loader } from 'semantic-ui-react';
+import { ItemContext } from '../../Context';
+import { fetchCharacter } from '../../Service/ContentService/ContentService';
+import { TableCharacter } from './TableCharacter/TableCharacter';
+import { SearchCharacter } from './SearchCharacter/SearchCharacter';
 import './Character.css';
 
-export default function Character({ data }) {
+// USING REDUX
+// import { bindActionCreators } from 'redux';
+// import { useDispatch } from 'react-redux';
+// import { characterAction } from '../../Redux/Action/index';
+
+export default function Character() {
 
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
 
-    const dispatch = useDispatch();
-    const { pageCharacter, searchCharacter } = bindActionCreators(characterAction, dispatch);
+    const [character, setCharacter] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    function handlePageClick(e, { name }) {
-        if (!(name < 1) && !(name > data.count)) {
-            setPage(name);
-            pageCharacter(name);
-            searchCharacter(search)
+    useEffect(() => {
+        async function fetchAllCharacter() {
+            await fetchCharacter(page, search).then((res) => {
+                setCharacter(res);
+                setLoading(true);
+            })
         }
-    }
 
-    function handleSearchClick(e) {
-        if (e.key === "Enter") {
-            pageCharacter(page);
-            searchCharacter(search);
-        }
-    }
+        fetchAllCharacter();
+    }, [page, search]);
 
     return (
         <div className="body-character">
-
-            <div className="ui action input mb-3">
-                <input type="text" placeholder="Search character..." onKeyPress={handleSearchClick} onChange={(e) => setSearch(e.target.value)} />
-                <button className="ui icon button" onClick={handleSearchClick}>
-                    <i className="search icon"></i>
-                </button>
-            </div>
-
-            <Table celled>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Name</Table.HeaderCell>
-                        <Table.HeaderCell>Height</Table.HeaderCell>
-                        <Table.HeaderCell>Mass</Table.HeaderCell>
-                        <Table.HeaderCell>Gender</Table.HeaderCell>
-                        <Table.HeaderCell>Action</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                {
-                    data.results.map((item, index) => {
-                        const characterUrl = item.url.split('/').filter(Boolean);
-                        const characterId = characterUrl[characterUrl.length - 1];
-                        return (
-                            <Table.Body key={index}>
-                                <Table.Row>
-                                    <Table.Cell>{item.name}</Table.Cell>
-                                    <Table.Cell>{item.height}</Table.Cell>
-                                    <Table.Cell>{item.mass}</Table.Cell>
-                                    <Table.Cell>{item.gender}</Table.Cell>
-                                    <Table.Cell>
-                                        <Link to={`/character/${characterId}`}>
-                                            Detail
-                                        </Link>
-                                    </Table.Cell>
-                                </Table.Row>
-                            </Table.Body>
-                        )
-                    })
-                }
-
-                <Table.Footer>
-                    <Table.Row>
-                        <Table.HeaderCell colSpan='5'>
-                            <Menu floated='right' pagination>
-                                <Menu.Item name={page - 1} icon onClick={handlePageClick}>
-                                    <Icon name='chevron left' />
-                                </Menu.Item>
-
-                                <Menu.Item name={1} active={page === 1} onClick={handlePageClick}>1</Menu.Item>
-                                <Menu.Item name={2} active={page === 2} onClick={handlePageClick}>2</Menu.Item>
-                                <Menu.Item name={3} active={page === 3} onClick={handlePageClick}>3</Menu.Item>
-                                <Menu.Item name={4} active={page === 4} onClick={handlePageClick}>4</Menu.Item>
-                                <Menu.Item name={5} active={page === 5} onClick={handlePageClick}>5</Menu.Item>
-
-                                <Menu.Item name={page + 1} icon onClick={handlePageClick}>
-                                    <Icon name='chevron right' />
-                                </Menu.Item>
-                            </Menu>
-                        </Table.HeaderCell>
-                    </Table.Row>
-                </Table.Footer>
-            </Table>
+            {
+                !loading ? (
+                    <Dimmer inverted>
+                        <Loader active inverted></Loader>
+                    </Dimmer>
+                ) : (
+                        <ItemContext.Provider value={{ character, pageChar: setPage, searchChar: setSearch }}>
+                            <SearchCharacter />
+                            <TableCharacter />
+                        </ItemContext.Provider>
+                    )
+            }
         </div>
     )
 
